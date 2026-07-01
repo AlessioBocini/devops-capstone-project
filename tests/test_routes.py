@@ -137,7 +137,6 @@ class TestAccountService(TestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         data = resp.get_json()
         self.assertEqual(len(data), 0)
-        pass
 
     def test_read_an_account(self):
         """It should Read a single Account"""
@@ -151,7 +150,6 @@ class TestAccountService(TestCase):
         data = resp.get_json()
         self.assertEqual(data["name"], account.name)
         self.assertEqual(data["email"], account.email)
-        pass
 
     def test_account_not_found(self):
         """It should not Read an Account that is not found"""
@@ -160,11 +158,19 @@ class TestAccountService(TestCase):
 
     def test_update_account(self):
         """It should Update an existing Account"""
-        self.assertEqual(len(Account.all()), 1)
+        accounts = self._create_accounts(3)
+        self.assertEqual(len(Account.all()), 3)
+
+        account = accounts[0]
+        account.name = "New Name"
+        resp = self.client.put(f"{BASE_URL}/{account.id}", json=account.serialize())
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
 
     def test_update_account_not_found(self):
         """It should not Update an Account that is not found"""
-        self.assertEqual(len(Account.all()), 1)
+        account = AccountFactory()
+        resp = self.client.put(f"{BASE_URL}/0", json=account.serialize())
+        self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_delete_account(self):
         """It should Delete an Account"""
