@@ -123,4 +123,42 @@ class TestAccountService(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 
-    # ADD YOUR TEST CASES HERE ...
+    def test_get_account_list(self):
+        """It should Get a list of Accounts"""
+        # to implement
+        pass
+
+    def test_get_account_list_empty(self):
+        """It should return an empty list when there are no Accounts"""
+        # to implement
+        pass
+
+    def test_read_an_account(self):
+        """It should Read a single Account"""
+        # to implement
+        pass
+
+    def test_account_not_found(self):
+        """It should not Read an Account that is not found"""
+        # to implement
+        pass
+
+    def test_update_account(self):
+        """It should Update an existing Account"""
+        # to implement
+        pass
+
+    def test_update_account_not_found(self):
+        """It should not Update an Account that is not found"""
+        # to implement
+        pass
+
+    def test_delete_account(self):
+        """It should Delete an Account"""
+        # to implement
+        pass
+
+    def test_delete_account_not_found(self):
+        """It should still return 204 when deleting an Account that does not exist"""
+        # to implement
+        pass
